@@ -1,0 +1,25 @@
+
+.App-logo {
+    height: 28px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+/*header part background*/
+.App-header {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 100vw;
+    color: #fff;
+    background-color: #00305C;
+    box-shadow: rgb(220, 220, 220) 0px 2px 10px;
+    /*CSS box-shadow 属性用于在元素的框架上添加阴影效果*/
+}
+/*titile 标题*/
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px;
+}
+
