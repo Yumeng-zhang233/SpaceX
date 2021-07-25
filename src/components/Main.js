@@ -21,6 +21,9 @@ class Main extends Component {
         // this.setState({
         //     settings: setting
         // })
+        this.setState({
+            settings: setting
+        });
         this.fetchSatellite(setting);
     }
     fetchSatellite = setting =>{
