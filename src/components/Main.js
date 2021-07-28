@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import { Row, Col } from 'antd';
 import axios from 'axios';
+import { NEARBY_SATELLITE, SAT_API_KEY, STARLINK_CATEGORY } from '../constants';
 import SatSetting from './SatSetting';
 import SatelliteList from './SatelliteList';
 import WorldMap from './WorldMap';
-import {NEARBY_SATELLITE, SAT_API_KEY, STARLINK_CATEGORY} from "../constants";
 
 
 class Main extends Component {
@@ -12,6 +13,8 @@ class Main extends Component {
         super();
         this.state = {
             satInfo: null,
+            satList: null,
+            setting: null,
             isLoadingList: false
         };
     }
@@ -50,22 +53,28 @@ class Main extends Component {
                 console.log('err in fetch satellite -> ', error);
             })
     }
-    showMap = () => {
-        console.log('show on the map');
+    showMap = selected => {
+        console.log(selected);
+        this.setState(preState =>({
+            ...preState,
+                satList:[...selected]
+            // ... select colone
+        }))
     }
     render() {
-        const { satInfo } = this.state;
+        const { isLoadingList, satInfo, satList, setting } = this.state;
         return (
-            <div className='main'>
-                <div className="left-side">
+            <Row className='main'>
+                <Col span={8} className="left-side">
                     <SatSetting onShow={this.showNearbySatellite}/>
-                    <SatelliteList satInfo={satInfo}
-                                   onShowMap={this.showMap}/>
-                </div>
-                <div className="right-side">
-                    <WorldMap />
-                </div>
-            </div>
+                    <SatelliteList isLoad={isLoadingList}
+                                   satInfo={satInfo}
+                                   onShowMap={this.showMap} />
+                </Col>
+                <Col span={16} className="right-side">
+                    <WorldMap satData={satList} observerData={setting} />
+                </Col>
+            </Row>
         );
     }
 }
